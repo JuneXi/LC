@@ -17,7 +17,7 @@ Input: [4,2,1]
 Output: False
 Explanation: You can't get a non-decreasing array by modify at most one element.
 Note: The n belongs to [1, 10,000].
-test*/
+*/
 
 public class NondecreasingArray {
     public boolean checkPossibility(int[] nums) {
