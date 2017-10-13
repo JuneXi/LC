@@ -10,7 +10,6 @@ Input:Digit string "23"
 Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].*/
 public class LetterCombinations {
     public List<String> letterCombinations(String digits) {
-        ArrayList<List<Character>> combo = new ArrayList<List<Character>>();
         
     }
 

@@ -25,8 +25,7 @@ public class WordLadder {
         if(wordList == null || wordList.size() == 0){
         	return 0;
         }
-        //add endWord to the wordList!
-        wordList.add(endWord);
+        
         Queue<String> q = new LinkedList<String>();
         Set<String> used = new HashSet<String>();
         q.offer(beginWord);
@@ -45,7 +44,7 @@ public class WordLadder {
             				continue;
             			}
             			String temp = replace(cur, c, j);
-            			if(wordList.contains(temp)){
+            			if(dict.contains(temp)){
             				nextWord.add(temp);    		
             			}
             		}
@@ -66,7 +65,7 @@ public class WordLadder {
         return 0;
     }
 
-    private ArrayList<String> getNext(String cur, Set<String> wordList){
+   /* private ArrayList<String> getNext(String cur, Set<String> wordList){
     	ArrayList<String> res = new ArrayList<String>();
     	for(char c = 'a'; c <= 'z'; c++){
     		for(int i = 0; i < cur.length(); i++){
@@ -79,7 +78,7 @@ public class WordLadder {
     		}
     	}
     	return res;
-    }
+    }*/
     
     private String replace(String cur, char c, int i){
     	char[] newString = cur.toCharArray();
