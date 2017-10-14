@@ -1,5 +1,7 @@
 package company.amazon;
 
+import java.util.ArrayList;
+import java.util.List;
 
 /*Given an index k, return the kth row of the Pascal's triangle.
 1

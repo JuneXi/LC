@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/*Given two words (beginWord and endWord), and a dictionary's word list, find all *shortest transformation sequence(s) from beginWord to endWord, such that:
+/*Given two words (beginWord and endWord), and a dictionary's word list, find all shortest transformation sequence(s) from beginWord to endWord, such that:
 
 Only one letter can be changed at a time
 Each transformed word must exist in the word list. Note that beginWord is not a transformed word.
@@ -20,10 +20,7 @@ Return
     ["hit","hot","dot","dog","cog"],
     ["hit","hot","lot","log","cog"]
   ]*/
-
-//最短路径用宽搜！！！dfs智障想哭= =
-//TODO: 前面map不用改，把dfs重写就可以了，结合word ladder写！
-public class WordLadder2 {
+public class WordLadder2findAll {
     public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
         if(wordList == null || wordList.size() == 0){
         	return null;
@@ -36,7 +33,7 @@ public class WordLadder2 {
         for(String word: wordList){
         	createMap(map, wordList, word);
         }
-        /*//for test
+        //for test
         System.out.println("map created as follow");
         for(String word: wordList){
         	System.out.println(word + ":\t");
@@ -45,24 +42,11 @@ public class WordLadder2 {
         		System.out.print(shuchu + "\t");
         	}
         	System.out.println();
-        }*/
+        }
         
     	//2. dfs to find a solution and add to result
         ArrayList<String> nextWord = new ArrayList<String>();
         dfs(beginWord, endWord, map, res, nextWord);
-        int length = Integer.MAX_VALUE;
-        for(int i = 0; i < res.size(); i++){
-        	if(length > res.get(i).size()){
-        		length = res.get(i).size();
-        	}
-        }
-        System.out.println("min = " + length);
-        int l = res.size();
-        for(int i = l - 1;i >= 0; i--){
-        	if(length < res.get(i).size()){
-        		res.remove(i);
-        	}
-        }
         return res;
     	
     }
@@ -90,31 +74,31 @@ public class WordLadder2 {
     private void dfs(String beginWord, String endWord, Map<String, ArrayList<String>> map, ArrayList<List<String>> res, ArrayList<String> nextWord){
     	if(beginWord.equals(endWord)){
     		nextWord.add(beginWord);
-    		//System.out.println("we find a list");
+    		System.out.println("we find a list");
     		res.add(new ArrayList<String>(nextWord));
     		return;
     	}  		
     	
-    	/*//test code begin
+    	//test code begin
     	System.out.println("now we will add " + beginWord + ", after that our list is :");
-    	
+    	nextWord.add(beginWord);
     	for(String testWord: nextWord){
     		System.out.print(testWord + "\t");
     	}
     	System.out.println();
     	//test code end
-*/    	
-    	nextWord.add(beginWord);
+    	
+    	
     	ArrayList<String> list = map.get(beginWord); 
     	
-    	/*//test code begin
+    	//test code begin
     	System.out.println("and the next wordList is:");
     	for(String testList: list){
     		System.out.print(testList + "\t");
     	}
     	System.out.println();
     	//test code end
-*/    	
+    	
     	if(list == null || list.size() == 0){
     		return;
     	}
@@ -123,7 +107,7 @@ public class WordLadder2 {
     			continue;
     		}
     		dfs(word, endWord, map, res, nextWord);
-    		//System.out.println("remove last word");
+    		System.out.println("remove last word");
     		nextWord.remove(nextWord.size() - 1);
     	}
     }
