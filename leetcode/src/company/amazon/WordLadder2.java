@@ -11,6 +11,8 @@ import java.util.Queue;
 import java.util.Set;
 
 public class WordLadder2 {
+	//so, waste a lot of time !!!!!!!!!!!!!!!!!!
+	//only need to change list dict to set dict!!!!!!!!!!!!!!!!!!!!!!!!!
 public List<List<String>> findLadders(String beginWord, String endWord, List<String> dict) {
         
     	ArrayList<List<String>> res = new ArrayList<List<String>>();
