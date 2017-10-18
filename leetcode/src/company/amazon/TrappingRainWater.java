@@ -14,8 +14,12 @@ public class TrappingRainWater {
     	int location = 0;
     	int cur = 0;
     	int[] waterLine = new int[height.length];
+    	
+    	//check from left to right
     	while(cur < height.length - 1){
+    		//check units right of current location
     		for( int j = cur + 1; j < height.length; j++){
+    			//when we find the first higher bar, we change waterLine from cur to that bar to cur bar value(except the higher bar),then move to next units
     			if(height[j] > height[cur]){
     				waterLine[j] = height[j];
     				for(int z = cur ; z < j; z++){
@@ -24,6 +28,7 @@ public class TrappingRainWater {
     				cur = j;
     				break;
     			}else{
+    				//if we can't find any bar higher than current, we mark the heighest bar of rest
     				if(height[j] >= max){
     					max = height[j];
     					location = j;
@@ -31,6 +36,8 @@ public class TrappingRainWater {
     			}
 
     		}
+    		
+    		//no higher bar, change waterLine from cur to highest, reset max & location
     		if(location > cur){
     			waterLine[cur] = height[cur];
 			for(int z = cur + 1; z <= location; z++){
@@ -39,7 +46,7 @@ public class TrappingRainWater {
     		cur = location; 		
     		}
     		max = 0;
-    	}
+    	}//after that, we got the waterLine
     	
     	int sum = 0;
     	for(int i = 0; i < height.length; i++){
