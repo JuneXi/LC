@@ -1,6 +1,5 @@
 package company.google;
 
-import java.util.ArrayList;
 
 public class LongestAbsoluteFilePath {
 	public int lengthLongestPath(String input) {

@@ -22,8 +22,20 @@ isMatch("aab", "c*a*b") ¡ú true*/
 public class RegularExpresssionMatching {
 	//note: map s to p, so p can be longer than s or have unmathced char
 	public boolean isMatch(String s, String p) {
+		//note: here
         if(s == null || s.length() == 0){
-        	return true;
+        	if(p == null || p.length() == 0){
+        		return true;
+        	}else{
+        		boolean dp[] = new boolean[p.length() + 1];
+        		dp[0] = true;
+        		for(int i = 0; i < p.length();i++){
+        			if(p.charAt(i) == '*' && dp[i - 1]){
+        				dp[i + 1] = true;
+        			}
+        		}
+        		return dp[p.length()];
+        	}
         }
         if(p == null || p.length() == 0){
         	return false;
@@ -39,21 +51,21 @@ public class RegularExpresssionMatching {
         	}
         }
         //TODO: j ? j+1? j-1?
-        for(int i = 1; i <= s.length(); i++){
-        	for(int j = 0; j <= p.length(); j++){
+        for(int i = 0; i < s.length(); i++){
+        	for(int j = 0; j < p.length(); j++){
         		//s.i == p.j -> check dp[i - 1][j - 1]
-        		if(s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '.'){
-        			dp[i][j] = dp[i - 1][j - 1];
+        		if(s.charAt(i) == p.charAt(j) || p.charAt(j) == '.'){
+        			dp[i + 1][j + 1] = dp[i][j];
         		}
         		
         		// a* has 3 meaning
         		//1. a* = null
         		//2. a* = a
         		//3. a* = aaaaaaaaa
-        		if(p.charAt(j -1 ) == '*'){
+        		if(p.charAt(j ) == '*'){
         			//because p.j-1 != s.i, p.j-1 must be ignored, we can only assume a* = empty, then check dp[i][j - 2]
-        			if(p.charAt(j - 2) != s.charAt(i - 1) && p.charAt(j -1) != '.'){
-        				dp[i][j] = dp[i][j - 2];
+        			if(p.charAt(j - 1) != s.charAt(i) && p.charAt(j - 1) != '.'){
+        				dp[i + 1][j + 1] = dp[i + 1][j - 1];
         			}else{
         				//here p.j-1 can stay, so we must consider all three (p.j-1)* above
         				//when (p.j-1)* = null, dp[i][j] = dp[i][j - 2]
@@ -63,7 +75,7 @@ public class RegularExpresssionMatching {
         				//aabbbbbb			 until dp[1][3], it's like we skip all continues b
         				//aab*
         				
-        				dp[i][j] = dp[i][j - 2] || dp[i][j - 1] || dp[i -1][j];
+        				dp[i + 1][j + 1] = dp[i + 1][j - 1] || dp[i + 1][j] || dp[i][j + 1];
         				
         			}
         		}
