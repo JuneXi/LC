@@ -10,43 +10,35 @@ Given "abcd", return "dcbabcd".*/
 
 //我们能看出回文数必须从原string的第一个字母开始。
 //如果s太长会超时
+//TODO: review KMP
+
 public class ShortestPalindrome {
 	public String shortestPalindrome(String s) {
         if(s == null || s.length() <= 1){
         	return s;
         }
-        //if from i to j is Palindrome
-        boolean[][] dp = new boolean[s.length()][s.length()];
-        for(int i = 0; i < dp.length; i++){
-        	dp[i][i] = true;
+        // note: use SB here
+        String temp = s + "#" + new StringBuilder(s).reverse();
+        int[] kmp = new int[temp.length()];
+        int index = 0;
+        //note: start from 1
+        for(int i = 1; i < temp.length(); i++){
+        	if(temp.charAt(index) == temp.charAt(i)){
+        		index ++;
+        		kmp[i] = kmp[i - 1] + 1;
+        	}else{
+        		index = kmp[i - 1];
+        		while(index > 0 && temp.charAt(index) != temp.charAt(i)){
+        			index = kmp[index - 1];
+        		}
+        		if(temp.charAt(index) == temp.charAt(i)){
+        			index++;
+        		}
+        		kmp[i] = index;
+        	}
         }
-        //note: if you have i + 1, don't forget the boundry
-        for(int i = 0; i < dp.length - 1; i++){
-        	dp[i][i + 1] = (s.charAt(i) == s.charAt(i + 1));
-        }
+        return new StringBuilder(s.substring(kmp[temp.length() - 1])).reverse() + s;
         
-        for( int j = 2; j < s.length(); j++){
-        	for(int i = 0; i + j < s.length(); i++){
-        		dp[i][i + j] = (s.charAt(i) == s.charAt(i + j))&& dp[i + 1][i + j - 1];
-        	}
-        }
-        int end = 0;
-        for(int i = dp.length - 1; i > 0; i--){
-        	if(dp[0][i]){
-        		end = i;
-        		//don't forget to break
-        		break;
-        	}
-        }
-        String res = "";
-        for(int i = s.length() - 1; i > end; i--){
-        	res = res + s.charAt(i);
-        }
-        //note: res = res.concat
-        res = res.concat(s);
-        return res;
-	
-	
 	}
 	
 }
