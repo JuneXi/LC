@@ -14,7 +14,7 @@ The two words can be "ab", "cd".
 
 Example 3:
 Given ["a", "aa", "aaa", "aaaa"]
-Return 0
+Return 0 
 No such pair of words.*/
 
 public class MaximumProductofWordLengths {
