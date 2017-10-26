@@ -15,35 +15,7 @@ public class ShortestPalindrome {
         if(s == null || s.length() <= 1){
         	return s;
         }
-        //if from i to j is Palindrome
-        boolean[][] dp = new boolean[s.length()][s.length()];
-        for(int i = 0; i < dp.length; i++){
-        	dp[i][i] = true;
-        }
-        //note: if you have i + 1, don't forget the boundry
-        for(int i = 0; i < dp.length - 1; i++){
-        	dp[i][i + 1] = (s.charAt(i) == s.charAt(i + 1));
-        }
         
-        for( int j = 2; j < s.length(); j++){
-        	for(int i = 0; i + j < s.length(); i++){
-        		dp[i][i + j] = (s.charAt(i) == s.charAt(i + j))&& dp[i + 1][i + j - 1];
-        	}
-        }
-        int end = 0;
-        for(int i = dp.length - 1; i > 0; i--){
-        	if(dp[0][i]){
-        		end = i;
-        		//don't forget to break
-        		break;
-        	}
-        }
-        String res = "";
-        for(int i = s.length() - 1; i > end; i--){
-        	res = res + s.charAt(i);
-        }
-        //note: res = res.concat
-        res = res.concat(s);
         return res;
 	
 	
