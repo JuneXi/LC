@@ -27,28 +27,31 @@ public class SpiralMatrix {
 		 int down = matrix.length - 1;
 		 int left = 0;
 		 int right = matrix[0].length - 1;
-	     while( up < down && left < right){
+	     while( up <= down && left <= right){
 	    	 //to right
-	    	 for(int j = left; j < right; j++){
+	    	 for(int j = left; j <= right; j++){
 	    		 res.add(matrix[up][j]);
 	    	 }
 	    	 up++;
 	    	 // got down
-	    	 for(int i = 0; i < down; i++){
+	    	 for(int i = up; i <= down; i++){
 	    		 res.add(matrix[i][right]);
 	    	 }
 	    	 right--;
 	    	 
 	    	 //go left
-	    	 for(int j = right - 1; j > left; j--){
+	    	 if(up <= down){
+	    	 for(int j = right; j >= left; j--){
 	    		 res.add(matrix[down][j]);
+	    	 }
 	    	 }
 	    	 down--;
 	    	 
 	    	 //go up
-	    	 for(int i = down - 1; i > up; i--){
+	    	 if(left <= right){
+	    	 for(int i = down; i >= up; i--){
 	    		 res.add(matrix[i][left]);
-	    	 }
+	    	 }}
 	    	 left++;
 	    	 
 	    	 

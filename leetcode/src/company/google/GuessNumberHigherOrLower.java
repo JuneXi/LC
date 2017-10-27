@@ -39,5 +39,9 @@ public class GuessNumberHigherOrLower {
 	return i;
         
     }
+	
+	int guess(int n){
+		return n;
+	}
 
 }

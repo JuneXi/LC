@@ -31,7 +31,7 @@ public class LetterCombinations {
     	map.put(9, "wxyz");
     	StringBuilder sb = new StringBuilder();
     	helper(res, sb, digits, map, 0);
-    	
+    	return res;
     	
         
     }
@@ -39,6 +39,10 @@ public class LetterCombinations {
     private void helper(ArrayList<String> res, StringBuilder sb, String digits, Map<Integer,String> map, int cur){
     	if(sb.length() == digits.length()){
     		res.add(sb.toString());
+    		return;
+    	}
+    	for(int i = 0; i < digits.length(); i ++){
+    		
     	}
     	
     }
