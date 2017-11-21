@@ -1,10 +1,10 @@
-package rotateArray;
+package arrays;
 
 import java.util.Arrays;
 
-public class Solution {
-public void rotate(int[] nums, int k) {
-	
+public class Rotate {
+	public void rotate(int[] nums, int k) {
+		
 	//if k = length or 0, no change
 	
 	if( nums.length > 0&&k!=0){
@@ -17,13 +17,13 @@ public void rotate(int[] nums, int k) {
 	}
 	System.out.print(Arrays.toString(nums));
     }
-public void reverse(int[] nums, int start, int end){
-	while(start < end){
-		int tem = nums[start];
-		nums[start++] = nums[end];
-		nums[end--] = tem;
-}
-}
-
+	
+	public void reverse(int[] nums, int start, int end){
+		while(start < end){
+			int tem = nums[start];
+			nums[start++] = nums[end];
+			nums[end--] = tem;
+		}
+	}
 
 }

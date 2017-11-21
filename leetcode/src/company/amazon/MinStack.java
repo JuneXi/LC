@@ -1,5 +1,7 @@
 package company.amazon;
 
+import java.util.Stack;
+
 /*Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
 
 push(x) -- Push element x onto stack.
@@ -17,26 +19,50 @@ minStack.top();      --> Returns 0.
 minStack.getMin();   --> Returns -2.*/
 
 class MinStack {
-
-    /** initialize your data structure here. */
+	long min;
+	Stack<Long> stack;
+	 /** initialize your data structure here. */
     public MinStack() {
+    	stack = new Stack<>();
         
     }
     
     public void push(int x) {
-        
+    	if(stack.isEmpty()){
+    		stack.push(0L);
+    		min = x;
+    	}else{
+    		stack.push(x - min);
+    		if(x < min){
+    			min = x;
+    		}
+    	}
     }
     
     public void pop() {
+    	if(stack.isEmpty()){
+    		return;
+    	}
+    	
+    	long pop = stack.pop();
+    	if(pop < 0){
+    		min = min - pop;
+    	}
         
     }
     
     public int top() {
+    	long top = stack.peek();
+    	if(top > 0){
+    		return (int) (top + min);
+    	}else{
+    		return (int)min;
+    	}
         
     }
     
     public int getMin() {
-        
+        return (int) min;
     }
 }
 

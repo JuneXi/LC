@@ -1,12 +1,10 @@
-package medianSortedArray;
+package arrays;
 
-//TODO: time limit exceeded
-
-public class Solution {
+public class FindMedianSortedArrays {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int length = nums1.length + nums2.length;
         if(length % 2 == 0){
-        	return (findKth(nums1, 0, nums2, 0, length/2) + findKth(nums1, 0, nums2, 0, length/2+1))/2.0;// notice 2.0
+        	return (findKth(nums1, 0, nums2, 0, length/2) + findKth(nums1, 0, nums2, 0, length/2 + 1)) / 2.0;// notice 2.0
         }
         else{
         	return findKth(nums1, 0 , nums2, 0, length/2 +1 );
