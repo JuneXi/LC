@@ -1,6 +1,9 @@
 
 package company.amazon;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /*Given an array nums, there is a sliding window of size k which is moving from the very left of the array to the very right. You can only see the k numbers in the window. Each time the sliding window moves right by one position.
 
 For example,
@@ -19,34 +22,36 @@ Therefore, return the max sliding window as [3,3,5,5,6,7].*/
 
 //TODO: nothing to say, just remember that!!!!
 public class SlidingWindowMaximum {
-	public int[] maxSlidingWindow(int[] nums, int k) {
-		if(nums == null || nums.length == 0){
-			return null;
-		}
-		
-		int[] left = new int[nums.length];
-		int[] right = new int[nums.length];
-		for(int i = 0; i < left.length; i++){
-			if(i % k == 0){
-				left[i] = nums[i];
-			}else{
-				left[i] = Math.max(nums[i], nums[i - 1]);
-			}
-			
-			int j = left.length - i - 1;
-			if(j % k == 0){
-				right[j] = nums[j];
-			}else{
-				right[j] = Math.max(nums[j], nums[j + 1]);
-			}
-		}
-		
-		int[] res = new int[nums.length - k + 1];
-		for(int i = 0; i < res.length; i++){
-			res[i] = Math.max(right[i + k - 1],left[] )
-		}
-		
-		
+	//note: Deque to modify first and last
+	// draw 
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if(nums == null || nums.length == 0){
+            return new int[]{};
+        }
+        Deque<Integer> dq = new ArrayDeque<>();
+        int[] res = new int[nums.length - k + 1];
+        //initialize
+        for(int i = 0; i < k - 1; i++){
+            inQueue(dq, nums[i]);
+        }
+        for(int i = k - 1; i < nums.length; i++){
+            inQueue(dq, nums[i]);
+            res[i - k + 1] = dq.peekFirst();
+            outQueue(dq, nums[i - k + 1]);
+        }
+        return res;
         
+    }
+    private void inQueue(Deque<Integer> dq, int n){
+        while(!dq.isEmpty() && dq.peekLast() < n){
+            dq.pollLast();
+        }
+        dq.offer(n);
+    }
+    
+    private void outQueue(Deque<Integer> dq, int n){
+        if(dq.peekFirst() == n){
+            dq.pollFirst();
+        }
     }
 }
